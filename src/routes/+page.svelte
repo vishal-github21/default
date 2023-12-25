@@ -1,4 +1,3 @@
-
 <script>
   import { onMount } from 'svelte';
 
@@ -41,8 +40,8 @@
           const movieId = firstResult.id;
           console.log('Found movie ID:', movieId);
 
-          // Embed the video using an iframe
-          embedVideo(movieId);
+          // Redirect to the video site using an anchor tag
+          redirectToVideoSite(movieId);
         } else {
           console.log('No results found');
         }
@@ -52,24 +51,18 @@
       });
   }
 
-  // Function to embed the video using the movie ID
-  function embedVideo(movieId) {
-    // Construct the URL for embedding the video
-    const videoUrl = `https://vidsrc.to/embed/movie/${movieId}`;
+  // Function to redirect to the video site using an anchor tag
+  function redirectToVideoSite(movieId) {
+    // Construct the URL for redirecting to the video site
+    const videoSiteUrl = `https://vidsrc.to/embed/movie/${movieId}`;
 
-    // Create an iframe element
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('src', videoUrl);
-    iframe.setAttribute('width', '100%');
-    iframe.setAttribute('height', '400'); // Adjust the height as needed
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('allowfullscreen', 'true');
+    // Create an anchor tag
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', videoSiteUrl);
+    anchor.setAttribute('target', '_blank'); // Open in a new tab/window
 
-    // Clear the previous video, if any
-    videoContainer.innerHTML = '';
-
-    // Append the iframe to the video container
-    videoContainer.appendChild(iframe);
+    // Trigger a click on the anchor to initiate the redirect
+    anchor.click();
   }
 </script>
 
